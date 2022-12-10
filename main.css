@@ -1,0 +1,132 @@
+#ek-overlay,
+#ek-modal {
+    display: none;
+}
+
+section,
+.dashboard-card,
+#page-header .card,
+.dropdown-menu,
+.section-summary.main,
+.info,
+.formulation.clearfix,
+.comment.clearfix,
+#gridshadebox_content {
+    border-radius: 12px;
+}
+
+.section,
+.card,
+#region-main {
+    background: #eee;
+}
+
+.section-summary.main {
+    border: 0.25px solid gray !important;
+}
+
+.dashboard-card .card-img,
+.dashboard-card .card-footer,
+div#nav-drawer::-webkit-scrollbar,
+.evalkit-widget-surveys,
+.usernav li:first-child {
+    display: none !important;
+}
+
+body,
+#nav-drawer {
+    background: black !important;
+}
+
+#nav-drawer .list-group-item {
+    border-radius: 12px;
+    margin: 5px 0;
+    background: #4e4e4e;
+    color: white;
+}
+
+#nav-drawer .list-group-item.active {
+    background: #800000;
+}
+
+.d-inline-block.mr-3>button {
+    background-color: #00000000 !important;
+    border: none;
+    color: white;
+}
+
+.navbar-brand {
+    background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
+    background-size: 240px !important;
+    margin-top: 12px;
+}
+
+.btn {
+    border-radius: 100px !important;
+}
+
+input,
+select {
+    border-radius: 8px !important;
+    border: 1px solid gray !important;
+}
+
+.editor_atto_toolbar {
+    border-radius: 12px 12px 0 0;
+}
+
+.editor_atto_content_wrap {
+    border-radius: 0 0 12px 12px;
+}
+
+.simplesearchform input {
+    border-radius: 100px 0 0 100px !important;
+}
+
+.simplesearchform button {
+    border-radius: 0 100px 100px 0 !important;
+}
+
+.ablock .answer div {
+    border-radius: 12px;
+    padding: 5px;
+    min-height: 10em !important;
+}
+
+#goto-top-link>a>i {
+    margin: 0 !important;
+}
+
+#goto-top-link a {
+    top: 20px;
+    right: 5px;
+}
+
+#page-footer {
+    border-radius: 12px;
+    margin: 10px;
+}
+
+nav.navbar {
+    border-radius: 0 0 12px 12px;
+    background: #80000090 !important;
+    border: none;
+    backdrop-filter: blur(5px);
+}
+
+div[data-region="grade-actions-panel"],
+div[data-region="grading-navigation-panel"] {
+    background: white;
+}
+
+.fp-viewbar.btn-group a {
+    margin: 0 5px;
+}
+
+#region-main>div.region_main_settings_menu_proxy {
+    background: transparent;
+}
+
+#nav-drawer>nav>ul>li>a>div.ml-1 {
+    margin-left: 0 !important;
+}
