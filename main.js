@@ -1,3 +1,21 @@
+const version = '2022.12.15';
+
+const checkForUpdates = () => {
+    fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/main.js').then(res => {
+        return res.text();
+    }).then(data => {
+        let globalVersion = data.split("const version = '")[1].substring(0, 10);
+        if (version != globalVersion) {
+            const element = document.querySelector("#nav-drawer > nav:nth-child(1) > ul > li:nth-child(1)").cloneNode(true);
+            element.querySelector('a').classList.remove('active');
+            element.querySelector('a').href = 'https://github.com/cm090/rhit-moodle-tweaks';
+            element.querySelector('a').target = '_blank';
+            element.querySelector('.media-body').innerText = 'Update available!';
+            element.querySelector('.icon').classList = 'icon fa fa-info fa-fw';
+            document.querySelector("#nav-drawer > nav > ul").prepend(element);
+        }
+    });
+}
 const cleanSideMenu = () => {
     let quarter = localStorage.getItem('filterQuarter');
     let start = false;
@@ -33,5 +51,6 @@ const modifyURL = () => {
         }
     });
 }
+checkForUpdates();
 cleanSideMenu();
 modifyURL();
