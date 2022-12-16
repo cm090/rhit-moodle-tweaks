@@ -2,8 +2,8 @@ const version = '2022.12.16';
 
 const checkForUpdates = () => {
     const d = new Date();
-    if (localStorage.getItem('lastCheck') == `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`) return;
-    fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/main.js').then(res => {
+    if (localStorage.getItem('lastCheck') == `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`) return Promise.resolve(false);
+    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/main.js').then(res => {
         return res.text();
     }).then(data => {
         let globalVersion = data.split("const version = '")[1].substring(0, 10);
@@ -16,17 +16,19 @@ const checkForUpdates = () => {
             element.querySelector('.icon').classList = 'icon fa fa-info fa-fw';
             document.querySelector("#nav-drawer > nav > ul").prepend(element);
         }
+    }).then(() => {
+        localStorage.setItem('lastCheck', `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
+        return Promise.resolve(true);
     });
-    localStorage.setItem('lastCheck', `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
 }
 const setStyle = () => {
-    fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/main.css').then(res => {
+    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/main.css').then(res => {
         return res.text();
     }).then(data => {
         var s = document.createElement("style");
         s.innerHTML = data;
         document.getElementsByTagName("head")[0].appendChild(s);
-    });
+    }).then(() => Promise.resolve());
 }
 const cleanSideMenu = () => {
     let quarter = localStorage.getItem('filterQuarter');
@@ -52,6 +54,7 @@ const cleanSideMenu = () => {
         else if (text == activeCourse)
             item.querySelector('a').classList.add('active');
     });
+    return Promise.resolve();
 }
 const modifyURL = () => {
     if ((window.location.pathname.length < 2 || window.location.href.includes('enrol')) && !window.location.hash.includes('bypass'))
@@ -62,18 +65,37 @@ const modifyURL = () => {
             link.target = '_blank';
         }
     });
+    return Promise.resolve();
 }
 const addButtons = () => {
-    if (window.location.pathname != '/my/') return;
-    fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/header-buttons').then(res => {
+    if (window.location.pathname != '/my/') return Promise.resolve(false);
+    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/header-buttons').then(res => {
         return res.text();
     }).then(data => {
         let element = document.querySelector("#page-header > div > div > div > div.d-flex.flex-wrap")
         element.innerHTML = data + element.innerHTML;
+    }).then(() => Promise.resolve(true));
+}
+const start = () => {
+    console.log('RMT > RHIT Moodle Tweaks by cm090\nhttps://github.com/cm090/rhit-moodle-tweaks');
+    checkForUpdates().then(res => {
+        if (res) console.log('RMT > Successfully checked for updates');
+        else console.log('RMT > Skipped update check');
+        setStyle();
+    }).then(() => {
+        console.log('RMT > Custom styles activated');
+        cleanSideMenu();
+    }).then(() => {
+        console.log('RMT > Side menu modified, click "My courses" to change');
+        modifyURL();
+    }).then(() => {
+        console.log('RMT > Finished URL check');
+        addButtons().then(res => {
+            if (res) console.log('RMT > Added custom buttons');
+            else console.log('RMT > Skipped custom buttons');
+            console.log('RMT > Done!');
+        });
     });
 }
-checkForUpdates();
-setStyle();
-cleanSideMenu();
-modifyURL();
-addButtons();
+
+start();
