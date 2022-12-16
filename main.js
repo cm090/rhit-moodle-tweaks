@@ -1,10 +1,8 @@
 const version = '2022.12.16';
 
-document.getElementsByTagName("head")[0].insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/main.css" />');
-
 const checkForUpdates = () => {
     const d = new Date();
-    if (localStorage.getItem('lastCheck') == `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`) return;
+    if (localStorage.getItem('lastCheck') == `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`) return;
     fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/main.js').then(res => {
         return res.text();
     }).then(data => {
@@ -19,7 +17,16 @@ const checkForUpdates = () => {
             document.querySelector("#nav-drawer > nav > ul").prepend(element);
         }
     });
-    localStorage.setItem('lastCheck', `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`);
+    localStorage.setItem('lastCheck', `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
+}
+const setStyle = () => {
+    fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/main.css').then(res => {
+        return res.text();
+    }).then(data => {
+        var s = document.createElement("style");
+        s.innerHTML = data;
+        document.getElementsByTagName("head")[0].appendChild(s);
+    });
 }
 const cleanSideMenu = () => {
     let quarter = localStorage.getItem('filterQuarter');
@@ -66,6 +73,7 @@ const addButtons = () => {
     });
 }
 checkForUpdates();
+setStyle();
 cleanSideMenu();
 modifyURL();
 addButtons();
