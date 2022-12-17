@@ -1,4 +1,4 @@
-<div class="d-flex my-auto">
+<div id="rmtButtons" class="my-auto">
     <a class="btn btn-primary mr-1" href="https://rosehulman.sharepoint.com/sites/MyRH" target="_blank">
         <div class="fa fa-globe"></div> My Rose-Hulman
     </a>

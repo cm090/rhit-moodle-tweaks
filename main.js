@@ -69,12 +69,18 @@ const modifyURL = () => {
 }
 const addButtons = () => {
     if (window.location.pathname != '/my/') return Promise.resolve(false);
+    if (document.querySelector("#page-header > div > div > div").clientWidth <= 833) return Promise.resolve();
     return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/header-buttons').then(res => {
         return res.text();
     }).then(data => {
         let element = document.querySelector("#page-header > div > div > div > div.d-flex.flex-wrap")
         element.innerHTML = data + element.innerHTML;
+        onresize = () => checkButtons();
+        checkButtons();
     }).then(() => Promise.resolve(true));
+}
+const checkButtons = () => {
+    document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-header > div > div > div").clientWidth <= 833) ? 'none' : 'flex';
 }
 const start = () => {
     console.log('RMT > RHIT Moodle Tweaks by cm090\nhttps://github.com/cm090/rhit-moodle-tweaks');
