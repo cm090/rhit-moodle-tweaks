@@ -22,7 +22,8 @@ const checkForUpdates = () => {
     });
 }
 const setStyle = () => {
-    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/main.css').then(res => {
+    const d = new Date();
+    return fetch(`https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/main.css?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => {
         return res.text();
     }).then(data => {
         var s = document.createElement("style");
@@ -70,7 +71,8 @@ const modifyURL = () => {
 const addButtons = () => {
     if (window.location.pathname != '/my/') return Promise.resolve(false);
     if (document.querySelector("#page-header > div > div > div").clientWidth <= 833) return Promise.resolve();
-    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/header-buttons').then(res => {
+    const d = new Date();
+    return fetch(`https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/header-buttons?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => {
         return res.text();
     }).then(data => {
         let element = document.querySelector("#page-header > div > div > div > div.d-flex.flex-wrap")
