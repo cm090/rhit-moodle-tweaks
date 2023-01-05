@@ -43,10 +43,16 @@ body,
     margin: 5px 0;
     background: #4e4e4e;
     color: white;
+    transition: 0.3s;
+}
+
+#nav-drawer .list-group-item:hover {
+    background: #444444 !important;
+    border-inline: 10px solid transparent;
 }
 
 #nav-drawer .list-group-item.active {
-    background: #800000;
+    background: #800000 !important;
 }
 
 .d-inline-block.mr-3>button {
