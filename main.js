@@ -151,10 +151,11 @@ const searchCode = () => {
 }
 
 const waitForjQuery = () => {
-    if (window.jQuery)
+    try {
         $("#rmtSearch").on('shown.bs.modal', () => document.querySelector('#rmtSearch .modal-body input').focus());
-    else
+    } catch (e) {
         setTimeout(waitForjQuery, 50);
+    }
 }
 
 const start = () => {
