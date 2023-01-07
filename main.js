@@ -95,7 +95,6 @@ const checkButtons = () => {
 }
 
 const searchListener = () => {
-    document.getElementById('rmtSearch').addEventListener('shown.bs.modal', () => document.querySelector('#rmtSearch .modal-body input').focus());
     let pos = 1;
     document.getElementById('rmtSearchInput').addEventListener('keydown', e => {
         if (e.key == 'ArrowDown') {
@@ -151,6 +150,13 @@ const searchCode = () => {
     }).then(() => Promise.resolve(true));
 }
 
+const waitForjQuery = () => {
+    if (window.jQuery)
+        $("#rmtSearch").on('shown.bs.modal', () => document.querySelector('#rmtSearch .modal-body input').focus());
+    else
+        setTimeout(waitForjQuery, 50);
+}
+
 const start = () => {
     console.log('RMT > RHIT Moodle Tweaks by cm090\nhttps://github.com/cm090/rhit-moodle-tweaks');
     checkForUpdates().then(res => {
@@ -171,6 +177,7 @@ const start = () => {
         addButtons().then(res => {
             if (res) console.log('RMT > Added custom buttons');
             else console.log('RMT > Skipped custom buttons');
+            waitForjQuery();
             console.log('RMT > Done!');
         });
     });
