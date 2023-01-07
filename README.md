@@ -18,8 +18,11 @@ ModifyURL:
 - Redirects to dashboard when on site home and course enrollment pages. Add `#bypass` to the end of the URL to avoid redirect.
 - Removes forcedownload attributes from file links. Useful for images and PDFs.
 
-addButtons:
+AddButtons:
 - Adds links to external sites at the top of the dashboard page
+
+CourseSearch:
+- Click the search button in the header or press Ctrl+K (Cmd+K) to open an updated search experience
 
 ### CSS
 A modern interface design with darker colors

@@ -1,6 +1,6 @@
-const version = '2023.01.06';
+const version = '2023.01.07';
 
-let courseData = [];
+let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
     const d = new Date();
     if (localStorage.getItem('lastCheck') == `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`) return Promise.resolve(false);
@@ -35,6 +35,8 @@ const setStyle = () => {
 }
 
 const cleanSideMenu = () => {
+    if ((new URLSearchParams(window.location.search)).get('id'))
+        courseData.push(['Grades', 'https://moodle.rose-hulman.edu/grade/report/user/index.php?id=' + (new URLSearchParams(window.location.search)).get('id')]);
     let quarter = localStorage.getItem('filterQuarter');
     let start = false;
     const activeCourse = (document.querySelector('[data-key="coursehome"] .media-body')) ? document.querySelector('[data-key="coursehome"] .media-body').innerText : '';
@@ -137,6 +139,7 @@ const searchListener = () => {
             $('#rmtSearch').modal('show');
         }
     });
+    document.querySelector('nav .simplesearchform').addEventListener('click', e => $('#rmtSearch').modal('show'));
     return Promise.resolve();
 }
 
@@ -147,14 +150,28 @@ const searchCode = () => {
     }).then(data => {
         document.body.innerHTML += data;
         searchListener();
+        waitForjQuery();
     }).then(() => Promise.resolve(true));
 }
 
 const waitForjQuery = () => {
     try {
-        $("#rmtSearch").on('shown.bs.modal', () => document.querySelector('#rmtSearch .modal-body input').focus());
+        $("#rmtSearch").on('shown.bs.modal', () => {
+            document.querySelector('#rmtSearch .modal-body input').focus();
+            $('#rmtResultList').slideDown({
+                start: function () {
+                    $(this).css({
+                        display: "block"
+                    })
+                },
+                duration: 200
+            });
+        });
+        $("#rmtSearch").on('show.bs.modal', () => {
+            document.querySelector('#rmtResultList').style.display = 'none';
+        });
     } catch (e) {
-        setTimeout(waitForjQuery, 50);
+        setTimeout(waitForjQuery, 500);
     }
 }
 
@@ -163,22 +180,21 @@ const start = () => {
     checkForUpdates().then(res => {
         if (res) console.log('RMT > Successfully checked for updates');
         else console.log('RMT > Skipped update check');
+        modifyURL();
+    }).then(() => {
+        console.log('RMT > Finished URL check');
         setStyle();
     }).then(() => {
         console.log('RMT > Custom styles activated');
         cleanSideMenu();
     }).then(() => {
         console.log('RMT > Side menu modified, click "My courses" to change');
-        searchCode();
-    }).then(() => {
-        console.log('RMT > Search program ready, press Ctrl+K to use');
-        modifyURL();
-    }).then(() => {
-        console.log('RMT > Finished URL check');
         addButtons().then(res => {
             if (res) console.log('RMT > Added custom buttons');
             else console.log('RMT > Skipped custom buttons');
-            waitForjQuery();
+            setTimeout(searchCode, 2000);
+        }).then(() => {
+            console.log('RMT > Search program ready, press Ctrl+K to use');
             console.log('RMT > Done!');
         });
     });
