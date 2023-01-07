@@ -140,15 +140,15 @@ div[data-region="grading-navigation-panel"] {
 
 #rmtSearch .modal-body,
 #rmtSearch .modal-footer {
-    background: #00000099;
+    background: #000000dd;
 }
 
 #rmtSearch .modal-body {
-    border-radius: 8px 8px 0 0;
+    border-radius: 12px 12px 0 0;
 }
 
 #rmtSearch .modal-footer {
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 12px 12px;
     border-top-color: #6f6f6f !important;
 }
 
@@ -158,7 +158,7 @@ div[data-region="grading-navigation-panel"] {
 }
 
 #rmtSearch #rmtResultList div {
-    padding: 5px !important;
+    padding: 8px !important;
     color: white;
 }
 
@@ -177,8 +177,6 @@ div[data-region="grading-navigation-panel"] {
     background: transparent;
     color: white;
     width: calc(100% - 25px);
-}
-
-#rmtSearch button.close span {
-    color: white;
+    border: none !important;
+    outline: none;
 }
