@@ -137,3 +137,48 @@ div[data-region="grading-navigation-panel"] {
 #nav-drawer>nav>ul>li>a>div.ml-1 {
     margin-left: 0 !important;
 }
+
+#rmtSearch .modal-body,
+#rmtSearch .modal-footer {
+    background: #00000099;
+}
+
+#rmtSearch .modal-body {
+    border-radius: 8px 8px 0 0;
+}
+
+#rmtSearch .modal-footer {
+    border-radius: 0 0 8px 8px;
+    border-top-color: #6f6f6f !important;
+}
+
+#rmtSearch .modal-content {
+    background: transparent !important;
+    border: none !important;
+}
+
+#rmtSearch #rmtResultList div {
+    padding: 5px !important;
+    color: white;
+}
+
+#rmtSearch #rmtResultList div.active {
+    background: #800000;
+    border-radius: 4px;
+}
+
+#rmtSearch #rmtResultList div.active::after {
+    content: 'Enter';
+    color: #ffffffa6;
+    float: right;
+}
+
+#rmtSearch #rmtSearchInput {
+    background: transparent;
+    color: white;
+    width: calc(100% - 25px);
+}
+
+#rmtSearch button.close span {
+    color: white;
+}
