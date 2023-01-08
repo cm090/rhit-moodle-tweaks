@@ -144,6 +144,7 @@ const searchListener = () => {
 }
 
 const searchCode = () => {
+    if (window.location.href.includes('submission') || window.location.href.includes('#bypass')) return Promise.resolve();
     const d = new Date();
     return fetch(`https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/search-modal?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => {
         return res.text();
@@ -151,7 +152,7 @@ const searchCode = () => {
         document.body.innerHTML += data;
         searchListener();
         waitForjQuery();
-    }).then(() => Promise.resolve(true));
+    }).then(() => Promise.resolve());
 }
 
 const waitForjQuery = () => {

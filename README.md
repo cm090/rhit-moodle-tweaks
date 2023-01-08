@@ -23,6 +23,7 @@ AddButtons:
 
 CourseSearch:
 - Click the search button in the header or press Ctrl+K (Cmd+K) to open an updated search experience
+- If something on the site isn't working, add `#bypass` to the end of the URL and try again
 
 ### CSS
 A modern interface design with darker colors
