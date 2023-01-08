@@ -1,4 +1,4 @@
-const version = '2023.01.07';
+const version = '2023.01.08';
 
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
@@ -200,4 +200,4 @@ const start = () => {
     });
 }
 
-start();
+if (document.getElementById('page-wrapper')) start();
