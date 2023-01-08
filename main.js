@@ -149,7 +149,7 @@ const searchCode = () => {
     return fetch(`https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/search-modal?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => {
         return res.text();
     }).then(data => {
-        document.querySelector("#page-course-view-topcoll > div:last-child").innerHTML += data;
+        document.querySelector("body > div:last-child").innerHTML += data;
         searchListener();
         waitForjQuery();
     }).then(() => Promise.resolve());
