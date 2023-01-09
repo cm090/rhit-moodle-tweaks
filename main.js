@@ -1,4 +1,4 @@
-const version = '2023.01.08';
+const version = '2023.01.09';
 
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
@@ -149,7 +149,8 @@ const searchCode = () => {
     return fetch(`https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/search-modal?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => {
         return res.text();
     }).then(data => {
-        document.querySelector("body > div:last-child").innerHTML += data;
+        if (document.querySelector("#page-header")) document.querySelector("#page-header").innerHTML += data;
+        else document.querySelector('footer').innerHTML += data;
         searchListener();
         waitForjQuery();
     }).then(() => Promise.resolve());
