@@ -1,4 +1,4 @@
-const version = '2023.01.09';
+const version = '2023.01.11';
 
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
@@ -35,12 +35,10 @@ const setStyle = () => {
 }
 
 const cleanSideMenu = () => {
-    if ((new URLSearchParams(window.location.search)).get('id'))
-        courseData.push(['Grades', 'https://moodle.rose-hulman.edu/grade/report/user/index.php?id=' + (new URLSearchParams(window.location.search)).get('id')]);
     let quarter = localStorage.getItem('filterQuarter');
     let start = false;
     const activeCourse = (document.querySelector('[data-key="coursehome"] .media-body')) ? document.querySelector('[data-key="coursehome"] .media-body').innerText : '';
-    document.querySelectorAll("#nav-drawer > nav.list-group > ul > li").forEach(item => {
+    document.querySelectorAll("#nav-drawer > nav.list-group > ul > li").forEach((item, i) => {
         item.style.display = '';
         let text = item.querySelector('.media-body').innerText;
         if (!start) {
@@ -55,6 +53,8 @@ const cleanSideMenu = () => {
                 return;
             } else if (item.querySelector('a').href == window.location.href)
                 item.querySelector('a').classList.add('active');
+            else if (!['Participants', 'Badges', 'Download center', 'Dashboard', 'Site home', 'Calendar', 'Private files', 'Content bank'].includes(text) && i != 0)
+                courseData.push([text, item.querySelector('a').href]);
         } else {
             courseData.push([text, item.querySelector('a').href]);
             if (start && !text.includes(quarter))
