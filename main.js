@@ -134,10 +134,8 @@ const searchListener = () => {
     document.getElementById('rmtSearchInput').addEventListener('input', createList);
     createList({ target: { value: '' } });
     document.addEventListener('keydown', e => {
-        if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k') {
-            e.preventDefault();
+        if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
             $('#rmtSearch').modal('show');
-        }
     });
     document.querySelector('nav .simplesearchform').addEventListener('click', e => $('#rmtSearch').modal('show'));
     return Promise.resolve();
@@ -194,6 +192,10 @@ const start = () => {
         addButtons().then(res => {
             if (res) console.log('RMT > Added custom buttons');
             else console.log('RMT > Skipped custom buttons');
+            document.addEventListener('keydown', e => {
+                if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
+                    e.preventDefault();
+            });
             setTimeout(searchCode, 2000);
         }).then(() => {
             console.log('RMT > Search program ready, press Ctrl+K to use');
