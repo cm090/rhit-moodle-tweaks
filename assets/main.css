@@ -96,7 +96,6 @@ select {
 .ablock .answer div {
     border-radius: 12px;
     padding: 5px;
-    min-height: 10em !important;
 }
 
 #goto-top-link>a>i {
