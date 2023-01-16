@@ -6,7 +6,7 @@ Note: This code was designed for Rose-Hulman's Moodle site
 
 ## Getting Started
 1. Download a code injector plugin for your browser. I'm using [Injector for Chrome](https://chrome.google.com/webstore/detail/injector/bfdonckegflhbiamlmidciapolfccmmb).
-2. Create a new JS snippet for the website domain. Copy and paste the code from `main.js`.
+2. Create a new JS snippet for the website domain. Copy and paste the code from `moodle-main.js`.
 3. Click save and reload your Moodle page
 
 ## Features
