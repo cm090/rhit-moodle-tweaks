@@ -1,4 +1,4 @@
-const version = '2023.01.11';
+const version = '2023.01.16';
 
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
@@ -98,6 +98,11 @@ const checkButtons = () => {
 
 const searchListener = () => {
     let pos = 1;
+    courseData.push(['My Rose-Hulman', 'https://rosehulman.sharepoint.com/sites/MyRH']);
+    courseData.push(['Banner Web', 'https://bannerweb.rose-hulman.edu/login']);
+    courseData.push(['Gradescope', 'https://www.gradescope.com']);
+    courseData.push(['Campus Groups', 'https://www.campusgroups.com/shibboleth/rosehulman']);
+    courseData.push(['Dining Hall Menu', 'https://rose-hulman.cafebonappetit.com']);
     document.getElementById('rmtSearchInput').addEventListener('keydown', e => {
         if (e.key == 'ArrowDown') {
             e.preventDefault();
@@ -126,6 +131,7 @@ const searchListener = () => {
                 document.getElementById('rmtResultList').innerHTML += `<div style="margin:0" onclick="window.location='${item[1]}'">${item[0]}</div>`;
                 i++;
             }
+            if (i == 5) return;
         });
         if (i == 0)
             document.getElementById('rmtResultList').innerHTML += `<div style="margin:0" onclick="window.location='https://moodle.rose-hulman.edu/search/index.php?q=${document.getElementById('rmtSearchInput').value}'">More results</div><p style="color:lightgray; font-size:12px; margin-top:5px; margin-bottom:0;">Courses older than 1 year might not show up in this list</p>`;
