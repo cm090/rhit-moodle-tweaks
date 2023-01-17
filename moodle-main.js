@@ -1,10 +1,10 @@
-const version = '2023.01.16';
+const version = '2023.01.17';
 
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
     const d = new Date();
     if (localStorage.getItem('lastCheck') == `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`) return Promise.resolve(false);
-    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/main.js').then(res => {
+    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/moodle-main.js').then(res => {
         return res.text();
     }).then(data => {
         let globalVersion = data.split("const version = '")[1].substring(0, 10);
