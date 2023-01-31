@@ -42,7 +42,7 @@
         cursor: pointer;
     }
 
-    body>table:first-child>tbody>tr:nth-child(1) {
+    body > table:nth-child(4) > tbody > tr:nth-child(1) {
         display: none;
     }
 
