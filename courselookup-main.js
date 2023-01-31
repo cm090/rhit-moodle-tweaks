@@ -8,3 +8,5 @@ if (document.forms[0] && document.querySelector("body > form > table > tbody > t
 	fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/courselookup-matrix').then(res => res.text()).then(data => document.querySelector('body').innerHTML = data + document.querySelector('body').innerHTML);
 else if (document.querySelectorAll('table').length > 1)
 	fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/courselookup-detail').then(res => res.text()).then(data => document.querySelector('body').innerHTML = data + document.querySelector('body').innerHTML);
+else if (document.title.includes('Schedule Options'))
+	fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/courselookup-schedule').then(res => res.text()).then(data => document.querySelector('body').innerHTML = data + document.querySelector('body').innerHTML);
