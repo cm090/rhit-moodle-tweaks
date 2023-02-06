@@ -12,6 +12,7 @@ section,
 .formulation.clearfix,
 .comment.clearfix,
 #gridshadebox_content,
+.modal-dialog,
 .modal-content {
     border-radius: 12px;
 }
