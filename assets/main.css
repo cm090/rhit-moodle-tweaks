@@ -11,7 +11,8 @@ section,
 .info,
 .formulation.clearfix,
 .comment.clearfix,
-#gridshadebox_content {
+#gridshadebox_content,
+.modal-content {
     border-radius: 12px;
 }
 
