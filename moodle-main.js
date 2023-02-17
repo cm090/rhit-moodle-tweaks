@@ -1,4 +1,20 @@
-const version = '2023.01.17';
+const version = '2023.02.17';
+
+const cookieCheck = (search) => {
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].split("=");
+        if (c[0].substring(0, 1) == " ") {
+            c[0] = c[0].substring(1);
+        }
+        if (c[0] === search) {
+            return c[1];
+        }
+    }
+    return false;
+}
+if (cookieCheck('filterQuarter') && !localStorage.getItem('filterQuarter')) localStorage.setItem('filterQuarter', cookieCheck('filterQuarter'));
 
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
@@ -47,6 +63,7 @@ const cleanSideMenu = () => {
                 item.onclick = () => {
                     let newQuarter = prompt('Select a quarter (Ex: 2223F):');
                     newQuarter = parseInt(newQuarter.substring(0, 4)) + newQuarter.charAt(4);
+                    document.cookie = `filterQuarter=${newQuarter};path=/;max-age=7884000;priority=high`;
                     localStorage.setItem('filterQuarter', newQuarter);
                     cleanSideMenu();
                 }
@@ -93,6 +110,7 @@ const addButtons = () => {
 }
 
 const checkButtons = () => {
+		document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a")
     document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-header > div > div > div").clientWidth <= 833) ? 'none' : 'flex';
 }
 
