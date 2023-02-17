@@ -110,7 +110,7 @@ const addButtons = () => {
 }
 
 const checkButtons = () => {
-		document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a")
+		document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a").onclick = () => {}
     document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-header > div > div > div").clientWidth <= 833) ? 'none' : 'flex';
 }
 
