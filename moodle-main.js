@@ -1,4 +1,4 @@
-const version = '2023.02.17';
+const version = '2023.03.12';
 
 const cookieCheck = (search) => {
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -54,6 +54,10 @@ const cleanSideMenu = () => {
     let quarter = localStorage.getItem('filterQuarter');
     let start = false;
     const activeCourse = (document.querySelector('[data-key="coursehome"] .media-body')) ? document.querySelector('[data-key="coursehome"] .media-body').innerText : '';
+    if (document.querySelectorAll(".sectionname").length > 1)
+        document.querySelectorAll(".sectionname").forEach(item => {
+            courseData.push([item.innerText, `#${item.id}`]);
+        });
     document.querySelectorAll("#nav-drawer > nav.list-group > ul > li").forEach((item, i) => {
         item.style.display = '';
         let text = item.querySelector('.media-body').innerText;
@@ -73,7 +77,8 @@ const cleanSideMenu = () => {
             else if (!['Participants', 'Badges', 'Download center', 'Dashboard', 'Site home', 'Calendar', 'Private files', 'Content bank'].includes(text) && i != 0)
                 courseData.push([text, item.querySelector('a').href]);
         } else {
-            courseData.push([text, item.querySelector('a').href]);
+            if (text.length > 2)
+                courseData.push([text, item.querySelector('a').href]);
             if (start && !text.includes(quarter))
                 item.style.display = 'none';
             else if (text == activeCourse)
@@ -110,7 +115,8 @@ const addButtons = () => {
 }
 
 const checkButtons = () => {
-		document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a").onclick = () => {}
+    if (document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a"))
+        document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a").onclick = () => { }
     document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-header > div > div > div").clientWidth <= 833) ? 'none' : 'flex';
 }
 
@@ -138,6 +144,7 @@ const searchListener = () => {
             }
         } else if (event.key == 'Enter') {
             document.querySelector(`#rmtSearch #rmtResultList div:nth-child(${pos})`).click();
+            $('#rmtSearch').modal('hide');
         }
     });
     const createList = e => {
@@ -145,6 +152,7 @@ const searchListener = () => {
         let i = 0;
         document.getElementById('rmtResultList').innerHTML = '';
         courseData.forEach(item => {
+            if (item[0].length <= 1) return;
             if (item[0].toLowerCase().includes(e.target.value.toLowerCase()) && i < 5) {
                 document.getElementById('rmtResultList').innerHTML += `<div style="margin:0" onclick="window.location='${item[1]}'">${item[0]}</div>`;
                 i++;
